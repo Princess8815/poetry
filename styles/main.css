@@ -1,0 +1,141 @@
+body {
+    background-color: #fdf0f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .bg-gradient-pink {
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+  }
+  
+  .hero-section {
+    background: linear-gradient(to right, #ffb6c1, #db7093);
+    color: white;
+  }
+  
+  #featured-titles .card {
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  #featured-titles .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+  
+  .home-button {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	background-color: #ff69b4;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: bold;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+	background-color: #ff1493;
+}
+
+.contrast-button {
+	position: fixed;
+	top: 70px;
+	left: 25px;
+	background-color: #333;
+	color: rgb(10, 10, 251);
+	border: none;
+	padding: 10px 14px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: bold;
+	z-index: 1000;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.contrast-button:hover {
+	background-color: orange;
+}
+
+.high-contrast .contrast-button {
+	background-color: #fff !important;
+	color: rgb(10, 10, 251) !important;
+	border: 1px solid #fff !important;
+}
+
+.high-contrast .contrast-button:hover {
+	background-color: orange !important;
+	color: rgb(10, 10, 251) !important;
+}
+
+/* High contrast mode styles */
+.high-contrast {
+	background-color: orange !important;
+	color: blue !important;
+}
+
+.high-contrast .navbar,
+.high-contrast .hero-section,
+.high-contrast .btn,
+.high-contrast .poem-container {
+	background-color: #000 !important;
+	color: #fff !important;
+	border-color: #fff !important;
+}
+
+.high-contrast .card,
+.high-contrast .btn-outline-primary,
+.high-contrast .btn-success {
+	background-color: #111 !important;
+	color: #fff !important;
+	border: 1px solid #fff !important;
+}
+
+.high-contrast .btn-success:hover {
+	background-color: #333 !important;
+}
+
+/* Fix the contrast for NAVBAR */
+.high-contrast .navbar {
+	background-color: #000 !important;
+	color: #fff !important;
+}
+
+.high-contrast .navbar .nav-link,
+.high-contrast .navbar-brand {
+	color: #fff !important;
+}
+
+.high-contrast .navbar .nav-link:hover {
+	color: #ff0 !important;
+}
+
+/* Fix the contrast for HEADER (Hero Section) */
+.high-contrast .hero-section {
+	background: #000 !important;
+	color: #fff !important;
+}
+
+.high-contrast .hero-section h1,
+.high-contrast .hero-section p {
+	color: #fff !important;
+}
+
+.high-contrast .bg-gradient-pink {
+	background: #000 !important;
+	background-image: none !important;
+}
+
+
