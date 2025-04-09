@@ -14,7 +14,7 @@ const products = [
     {
       name: "poem of the day 30 day subscription",
       price: 9.99,
-      description: "Have your name listed as a supporter on the homepage."
+      description: "comming soon"
     },
     {
       name: "Donate",
