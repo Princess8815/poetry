@@ -2,18 +2,18 @@
 
 const products = [
     {
-      name: "Signed Poetry Book",
-      price: 25.00,
-      description: "A signed copy of Kirstin's latest poetry book, mailed to your address."
+      name: "digital custum poetry",
+      price: 20.00,
+      description: "Please use the text box to give the content theme length up to 20 lines and any details you want"
     },
     {
-      name: "Short Story PDF Bundle",
-      price: 10.00,
-      description: "A downloadable bundle of Kirstin's favorite short stories."
+      name: "digital short story",
+      price: 40.00,
+      description: "Please use the text box to give the content theme length up to aproximately 1000 words and any details you want"
     },
     {
-      name: "Name Credit on Website",
-      price: 5.00,
+      name: "poem of the day 30 day subscription",
+      price: 9.99,
       description: "Have your name listed as a supporter on the homepage."
     },
     {
