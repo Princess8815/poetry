@@ -1,6 +1,6 @@
 const titleLinks = {
 	// Short Stories (original 6)
-	"The Midnight Petal": "books/the-midnight-petal.html",
+	"The Midnight Petal": "short-stories/the-midnight-petal.html",
 	"Echoes in Stardust": "short-stories/echoes-in-stardust.html",
 	"Threadbare Hearts": "short-stories/threadbare-hearts.html",
 	"Letters Never Sent": "short-stories/letters-never-sent.html",

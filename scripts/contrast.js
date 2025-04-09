@@ -1,14 +1,17 @@
 // scripts/contrast.js
 
+// Create the contrast toggle button
 const contrastButton = document.createElement("button");
 contrastButton.innerText = "🌓 Contrast";
-contrastButton.className = "contrast-button btn btn-dark btn-sm mt-2";
+contrastButton.className = "contrast-button btn btn-dark btn-sm";
 
-const brand = document.querySelector(".navbar .navbar-brand");
-if (brand && brand.parentElement) {
-	brand.insertAdjacentElement("afterend", contrastButton);
+// Try to add it to the contrast container if it exists
+const contrastContainer = document.querySelector(".contrast-container");
+if (contrastContainer) {
+	contrastContainer.appendChild(contrastButton);
 }
 
+// Define contrast logic (always runs regardless of container presence)
 const applyHighContrast = () => {
 	document.body.classList.add("high-contrast");
 	localStorage.setItem("contrastMode", "high");
@@ -27,6 +30,8 @@ contrastButton.addEventListener("click", () => {
 	}
 });
 
+// Load saved mode on page load
 if (localStorage.getItem("contrastMode") === "high") {
 	applyHighContrast();
 }
+

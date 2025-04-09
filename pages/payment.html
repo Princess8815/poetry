@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support the Author</title>
+  <link rel="stylesheet" href="../styles/main.css" />
+  <script src="../scripts/products.js" defer></script>
+</head>
+<body>
+  <section id="support" class="text-center my-5 py-5 bg-light">
+    <div class="container">
+      <h2 class="mb-4 text-dark">Love what you read?</h2>
+      <p class="mb-4">Help keep the stories flowing. Your support means the world.</p>
+
+      <form id="support-form" class="text-start mx-auto" style="max-width: 600px;">
+        <!-- Name -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+          <input type="text" id="name" name="name" class="form-control" required />
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+          <input type="email" id="email" name="email" class="form-control" required />
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone (Optional)</label>
+          <input type="tel" id="phone" name="phone" class="form-control" />
+        </div>
+
+        <!-- Product Selection -->
+        <div class="mb-3">
+          <label for="product" class="form-label">Select a Product</label>
+          <select id="product" name="product" class="form-select">
+            <option value="">Choose an option...</option>
+          </select>
+        </div>
+
+        <!-- Donation Field (Shown if 'Donate' is selected) -->
+        <div class="mb-3" id="donation-group" style="display: none;">
+          <label for="donation" class="form-label">Donation Amount ($)</label>
+          <input type="number" id="donation" name="donation" min="1" step="0.01" class="form-control" />
+        </div>
+
+        <!-- Price Display -->
+        <div class="mb-3">
+          <label class="form-label">Price:</label>
+          <p id="price-display" class="form-control-plaintext">$0.00</p>
+        </div>
+
+        <!-- Product Description -->
+        <div class="mb-3">
+          <label class="form-label">Description:</label>
+          <p id="description-display" class="form-control-plaintext">Please select a product.</p>
+        </div>
+
+        <!-- Specifications -->
+        <div class="mb-3">
+          <label for="specifications" class="form-label">Specifications or Notes</label>
+          <textarea id="specifications" name="specifications" rows="4" class="form-control"></textarea>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-success btn-lg px-5">Checkout</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
+
+  
