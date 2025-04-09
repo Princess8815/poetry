@@ -10,12 +10,14 @@
 }
 
 .poem-container {
-	width: 50%;
+	width: 100%;
+	max-width: 700px;
 	background: white;
 	padding: 2rem;
 	border-radius: 15px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 	position: relative;
+	box-sizing: border-box;
 }
 
 .audio-button {
@@ -39,9 +41,36 @@
 	margin-top: 2rem;
 	margin-bottom: 1.5rem;
 	color: #d63384;
+	font-size: 2rem;
 }
 
-.poem-text p {
-	margin-bottom: 1.2rem;
-	line-height: 1.7;
+.poem-text pre {
+	white-space: pre-wrap;
+	font-size: 1.1rem;
+	line-height: 1.8;
+	color: #333;
+	margin: 0;
 }
+
+@media (max-width: 768px) {
+	.poem-page {
+		padding: 1rem;
+	}
+
+	.poem-container {
+		width: 95%;
+		padding: 1.5rem;
+	}
+
+	.poem-title {
+		font-size: 1.5rem;
+	}
+
+	.audio-button {
+		width: 40px;
+		height: 40px;
+		font-size: 1.2rem;
+	}
+}
+
+
