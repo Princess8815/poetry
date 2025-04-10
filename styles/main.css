@@ -62,7 +62,7 @@ body {
 }
 
 .contrast-button:hover {
-	background-color: orange;
+	background-color: #d63384;
 	color: white;
 }
 
@@ -74,13 +74,13 @@ body {
 }
 
 .high-contrast .contrast-button:hover {
-	background-color: orange;
+	background-color: #d63384;
 	color: rgb(3, 3, 98) !important;
 }
 
 /* High contrast mode styles */
 .high-contrast {
-	background-color: orange !important;
+	background-color: #d63384 !important;
 	color: rgb(4, 4, 66) !important;
 }
 
