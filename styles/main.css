@@ -69,19 +69,19 @@ body {
 /* High Contrast Mode */
 .high-contrast .contrast-button {
 	background-color: #000;
-	color: #00f;
+	color: rgb(4, 4, 66);
 	border: 1px solid #fff;
 }
 
 .high-contrast .contrast-button:hover {
 	background-color: orange;
-	color: #00f;
+	color: rgb(3, 3, 98) !important;
 }
 
 /* High contrast mode styles */
 .high-contrast {
 	background-color: orange !important;
-	color: blue !important;
+	color: rgb(4, 4, 66) !important;
 }
 
 .high-contrast .navbar,
