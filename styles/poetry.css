@@ -96,3 +96,15 @@
 	color: #fff !important;
 	font-weight: bold;
 }
+
+.short-text pre {
+	white-space: pre-wrap;     /* Allow wrapping of preformatted text */
+	word-wrap: break-word;     /* Handle long words */
+	overflow-wrap: break-word; /* Modern version of word-wrap */
+	text-align: left;          /* Ensures left-justified text */
+	font-size: 1rem;
+	line-height: 1.6;
+	width: 100%;
+	box-sizing: border-box;
+}
+
