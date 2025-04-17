@@ -34,7 +34,12 @@ const titleLinks = {
 	"Dream": "poetry/dream.html",
 	"Shadow": "poetry/shadow.html",
 	"I will not": "poetry/i-will-not.html",
-	"Will you miss me when im gone": "poetry/will-you-miss-me-when-im-gone.html"
+	"Will you miss me when im gone": "poetry/will-you-miss-me-when-im-gone.html",
+
+	//funnies
+	"advertisements": "funnies/advertisements-landing.html",
+
+	"Slimblaze": "advertisements/slimblaze.html"
 };
 
 function getRandomTitles(arr, n) {
@@ -59,7 +64,12 @@ function renderTitles(containerId, filterFn = () => true, count = null) {
 			adjustedPath = path.replace("short-stories/", "../short-stories/");
 		} else if (document.body.classList.contains("books-page") && path.startsWith("books/")) {
 			adjustedPath = path.replace("books/", "../books/");
+		} else if (document.body.classList.contains("ad-page") && path.startsWith("advertisements/")) {
+			adjustedPath = "./advertisements/" + path.split("/").pop();
+		} else if (document.body.classList.contains("funnies-page") && path.startsWith("funnies/")) {
+			adjustedPath = path.replace("funnies/", "../funnies/");
 		}
+		
 
 		const card = document.createElement("div");
 		card.className = "col-md-4 mb-4";
@@ -80,8 +90,11 @@ window.onload = () => {
 	const isPoetryPage = document.body.classList.contains("poetry-page");
 	const isStoriesPage = document.body.classList.contains("short-stories-page");
 	const isBooksPage = document.body.classList.contains("books-page");
+	const isFunniesPage = document.body.classList.contains("funnies-page");
 
-	if (featuredContainer && !isPoetryPage && !isStoriesPage && !isBooksPage) {
+	const isAdPage = document.body.classList.contains("ad-page");
+
+	if (featuredContainer && !isPoetryPage && !isStoriesPage && !isBooksPage && !isFunniesPage && !isAdPage) {
 		renderTitles("featured-titles", () => true, 3);
 	}
 
@@ -95,5 +108,13 @@ window.onload = () => {
 
 	if (featuredContainer && isBooksPage) {
 		renderTitles("featured-titles", path => path.includes("books/"));
+	}
+
+	if (featuredContainer && isFunniesPage) {
+		renderTitles("featured-titles", path => /^funnies\/[^/]+\.html$/.test(path));
+	}
+
+	if (featuredContainer && isAdPage) {
+		renderTitles("featured-titles", path => /^advertisements\/[^/]+\.html$/.test(path));
 	}
 };
