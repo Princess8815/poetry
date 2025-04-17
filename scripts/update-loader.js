@@ -1,6 +1,6 @@
 const updateContainer = document.getElementById("latest-update");
 
-fetch("/pages/changes.html")
+fetch("pages/changes.html")
 	.then(response => response.text())
 	.then(html => {
 		const parser = new DOMParser();
