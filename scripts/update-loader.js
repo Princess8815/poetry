@@ -1,6 +1,6 @@
 const updateContainer = document.getElementById("latest-update");
 
-fetch("../pages/changes.html")
+fetch("/pages/changes.html")
 	.then(response => response.text())
 	.then(html => {
 		const parser = new DOMParser();
@@ -13,7 +13,7 @@ fetch("../pages/changes.html")
 			updateContainer.appendChild(latest);
 
 			const viewMore = document.createElement("p");
-			viewMore.innerHTML = `<a href="../pages/changes.html" class="fw-bold">View all updates →</a>`;
+			viewMore.innerHTML = `<a href="/pages/changes.html" class="fw-bold">View all updates →</a>`;
 			updateContainer.appendChild(viewMore);
 		} else {
 			updateContainer.innerHTML = "<p>No recent updates found.</p>";
