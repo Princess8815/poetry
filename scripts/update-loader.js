@@ -13,7 +13,8 @@ fetch("pages/changes.html") // 🔁 RELATIVE path = works everywhere
       updateContainer.appendChild(latest);
 
       const viewMore = document.createElement("p");
-      viewMore.innerHTML = `<a href="pages/changes.html" class="fw-bold">View all updates →</a>`;
+      viewMore.innerHTML = `<a href="https://princess8815.github.io/poetry/pages/changes.html" class="fw-bold">View all updates →</a>`;
+
 
       updateContainer.appendChild(viewMore);
     } else {
