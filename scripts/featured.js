@@ -8,6 +8,7 @@ const titleLinks = {
 	//"Whispers Beneath the Rain": "short-stories/whispers-beneath-the-rain.html",
 
 	// Poetry (your 28)
+	"Easter Poem 2025": "poetry/easter-poem-2025.html",
 	"A Daughter’s Truth": "poetry/a-daughters-truth.html",
 	"From Shadows to Light: A Journey of Truth": "poetry/from-shadows-to-light.html",
 	"Language We Trust": "poetry/language-we-trust.html",
