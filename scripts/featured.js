@@ -1,6 +1,6 @@
 const titleLinks = {
 	// Short Stories (original 6)
-	"Echoes in Stardust (comming may)": "short-stories/echoes-in-stardust/echoes-in-stardust.html",
+	"Echoes in Stardust (coming may)": "short-stories/echoes-in-stardust/echoes-in-stardust.html",
 	//"The Midnight Petal": "short-stories/the-midnight-petal.html",
 	//"Threadbare Hearts": "short-stories/threadbare-hearts.html",
 	//"Letters Never Sent": "short-stories/letters-never-sent.html",
