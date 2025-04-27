@@ -7,36 +7,40 @@ const titleLinks = {
 	//"Of Fire and Ink": "short-stories/of-fire-and-ink.html",
 	//"Whispers Beneath the Rain": "short-stories/whispers-beneath-the-rain.html",
 
-	// Poetry (your 28)
-	"Easter Poem 2025": "poetry/easter-poem-2025.html",
+	// Poetry (your 31)
+	"More Then a Word (new)": "poetry/more-then-a-word.html",
+	"The Playful Pooch (new)": "poetry/the-playful-pooch.html",
+	"Endless Scream (new)": "poetry/endless-scream.html",
 	"A Daughter’s Truth": "poetry/a-daughters-truth.html",
+	"A Journey Through Grief": "poetry/a-journey-through-grief.html",
+	"Animal parade": "poetry/animal-parade.html",
+	"Dream": "poetry/dream.html",
+	"Easter Poem 2025": "poetry/easter-poem-2025.html",
+	"Echoes of a Hidden Girl": "poetry/echoes-of-a-hidden-girl.html",
 	"From Shadows to Light: A Journey of Truth": "poetry/from-shadows-to-light.html",
+	"Holiday of cheer": "poetry/holiday-of-cheer.html",
+	"I Am Trans and Proud": "poetry/i-am-trans-and-proud.html",
+	"I will not": "poetry/i-will-not.html",
 	"Language We Trust": "poetry/language-we-trust.html",
+	"Marina the axolotl": "poetry/marina-the-axolotl.html",
+	"Morning poem": "poetry/morning-poem.html",
 	"Rainbow's True Pride": "poetry/rainbows-true-pride.html",
+	"Red round thing": "poetry/red-round-thing.html",
+	"Reflections Reborn": "poetry/reflections-reborn.html",
 	"Rise Above": "poetry/rise-above.html",
+	"Shadow": "poetry/shadow.html",
 	"The Friend Who Saved Her Life": "poetry/the-friend-who-saved-her-life.html",
 	"The Girl Inside": "poetry/the-girl-inside.html",
 	"The Road We Walk": "poetry/the-road-we-walk.html",
 	"The Silent Battle": "poetry/the-silent-battle.html",
 	"Trans Poem": "poetry/trans-poem.html",
-	"Morning poem": "poetry/morning-poem.html",
 	"Unbreakable": "poetry/unbreakable.html",
-	"Red round thing": "poetry/red-round-thing.html",
-	"Marina the axolotl": "poetry/marina-the-axolotl.html",
-	"Echoes of a Hidden Girl": "poetry/echoes-of-a-hidden-girl.html",
-	"Reflections Reborn": "poetry/reflections-reborn.html",
-	"A Journey Through Grief": "poetry/a-journey-through-grief.html",
-	"Holiday of cheer": "poetry/holiday-of-cheer.html",
-	"Animal parade": "poetry/animal-parade.html",
-	"I Am Trans and Proud": "poetry/i-am-trans-and-proud.html",
-	"5 piggies revised": "poetry/5-piggies-revised.html",
-	"5 piggies adult": "poetry/5-piggies-adult.html",
 	"When i am in need": "poetry/when-i-am-in-need.html",
-	"Dream": "poetry/dream.html",
-	"Shadow": "poetry/shadow.html",
-	"I will not": "poetry/i-will-not.html",
-	"Will you miss me when im gone": "poetry/will-you-miss-me-when-im-gone.html"
+	"Will you miss me when im gone": "poetry/will-you-miss-me-when-im-gone.html",
+	"5 piggies revised": "poetry/5-piggies-revised.html",
+	"5 piggies (adult)": "poetry/5-piggies-adult.html"
 };
+
 
 function getRandomTitles(arr, n) {
 	const shuffled = [...arr].sort(() => 0.5 - Math.random());
