@@ -52,6 +52,36 @@ async function insertRatingElement() {
 	const ratingDiv = document.createElement("div");
 	ratingDiv.className = "rating-widget";
 
+	async function fetchAndDisplayRatings(poemTitle) {
+		try {
+		  const response = await fetch(`https://backend-bzip.onrender.com/api/poem-rating?poemTitle=${encodeURIComponent(poemTitle)}`, {
+			method: "GET",
+			credentials: "include",
+		  });
+		  const data = await response.json();
+	  
+		  if (data.success) {
+			if (data.average !== null) {
+			  const averageDisplay = document.createElement("p");
+			  averageDisplay.className = "average-rating";
+			  averageDisplay.textContent = `Average Rating: ${data.average} / 5`;
+			  ratingDiv.insertBefore(averageDisplay, ratingDiv.firstChild);
+			}
+	  
+			if (data.userRating) {
+			  currentRating = data.userRating.rating;
+			  highlightStars(currentRating);
+			  commentInput.value = data.userRating.comment || "";
+			}
+		  } else {
+			console.warn("Could not fetch average rating.");
+		  }
+		} catch (err) {
+		  console.error("Error fetching ratings:", err);
+		}
+	  }
+	  
+
 	const title = document.createElement("h3");
 	title.textContent = "Rate This Poem";
 
@@ -91,36 +121,33 @@ async function insertRatingElement() {
 	submitButton.textContent = "Submit Rating";
 
 	submitButton.addEventListener("click", async () => {
-		if (!userId) {
-			alert("Please log in to submit a rating.");
-			return;
-		}
-
-		const payload = {
-			poemTitle,
-			rating: currentRating,
-			comment: commentInput.value.trim()
-		};
-
 		try {
-			const res = await fetch("https://backend-bzip.onrender.com/api/rate-poem", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				credentials: "include",
-				body: JSON.stringify(payload),
-			});
-
-			const data = await res.json();
-			if (data.success) {
-				alert("✅ Rating submitted!");
-				updateAverageRating();
-			} else {
-				alert("❌ Failed to submit rating.");
-			}
+		  const response = await fetch("https://backend-bzip.onrender.com/api/rate-poem", {
+			method: "POST",
+			credentials: "include",
+			headers: {
+			  "Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+			  poemTitle,
+			  rating: currentRating,
+			  comment: commentInput.value,
+			}),
+		  });
+	  
+		  const result = await response.json();
+		  if (result.success) {
+			alert("Your rating has been submitted.");
+			fetchAndDisplayRatings(poemTitle); // Refresh average rating
+		  } else {
+			alert("Failed to submit rating: " + result.error);
+		  }
 		} catch (err) {
-			alert("❌ Error submitting rating.");
+		  console.error("Error submitting rating:", err);
+		  alert("An error occurred while submitting your rating.");
 		}
-	});
+	  });
+	  
 
 	function highlightStars(rating) {
 		const stars = starsContainer.querySelectorAll(".star");
@@ -138,6 +165,7 @@ async function insertRatingElement() {
 	ratingDiv.appendChild(commentInput);
 	ratingDiv.appendChild(submitButton);
 	poemContainer.appendChild(ratingDiv);
+	fetchAndDisplayRatings(poemTitle);
 
 	// Step 3: Fetch user rating if logged in
 	if (userId) {
