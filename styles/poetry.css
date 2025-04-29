@@ -108,3 +108,30 @@
 	box-sizing: border-box;
 }
 
+.rating-widget {
+	text-align: center;
+	margin-top: 20px;
+  }
+  
+  .stars {
+	font-size: 2rem;
+	color: lightgray;
+	margin: 10px 0;
+	cursor: pointer;
+  }
+  
+  .star.highlighted {
+	color: gold;
+  }
+  
+  .comment-box {
+	width: 100%;
+	height: 80px;
+	margin-top: 10px;
+	resize: vertical;
+	padding: 8px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+  }
+  
+

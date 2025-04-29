@@ -46,8 +46,40 @@
 			<div class="container py-5">
 				<h1 class="display-3 fw-bold">All Poetry</h1>
 				<p class="lead">A collection of emotion, strength, and truth—one poem at a time.</p>
+		
+				<!-- Controls Row -->
+				<div class="row justify-content-center mt-4">
+					<div class="col-md-5 mb-2">
+						<div class="input-group">
+							<input type="text" id="searchInput" class="form-control" placeholder="Search titles..." />
+							<button class="btn btn-light" id="searchButton">Search</button>
+						</div>
+					</div>
+					<div class="col-md-3 mb-2">
+						<select id="sortOptions" class="form-select">
+							<option value="">Sort By</option>
+							<option value="titleAsc">Title (A–Z)</option>
+							<option value="titleDesc">Title (Z–A)</option>
+							<option value="dateAsc">Date (Oldest First)</option>
+							<option value="dateDesc">Date (Newest First)</option>
+						</select>
+					</div>
+					<div class="col-md-3 mb-2">
+						<select id="filterOptions" class="form-select">
+							<option value="">Filter By Category</option>
+							<option value="holiday">Holiday</option>
+							<option value="adult">Adult</option>
+							<option value="comedy">Comedy</option>
+							<option value="inspirational">Inspirational</option>
+							<option value="pride">Pride</option>
+						</select>
+					</div>
+				</div>
 			</div>
 		</header>
+		
+
+		
 
 		<!-- Poetry List -->
 		<section class="container my-5">
