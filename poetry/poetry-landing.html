@@ -8,8 +8,9 @@
 		<link rel="stylesheet" href="../styles/main.css" />
 		<script src="../scripts/featured.js" defer></script>
         <script src="../scripts/contrast.js" defer></script>
+		<script src="../scripts/auth.js" defer></script>
 	</head>
-	<body class="poetry-page" style="background-color: #fdf0f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+	<body id="1deep" class="poetry-page" style="background-color: #fdf0f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
 		<!-- Navigation -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-gradient-pink sticky-top">
 			<div class="container-fluid">
@@ -19,6 +20,9 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav ms-auto">
+						<li class="nav-item" id="auth-buttons">
+							<!-- JS will fill this with Login/Register or Account -->
+						</li>
                         <li class="nav-item">
 							<a class="nav-link" href="../index.html">Home</a>
 						</li>

@@ -1,7 +1,7 @@
 
 const titleLinks = {
 	// Short Stories (original 6)
-	"Echoes in Stardust (coming may)": {
+	"Echoes in Stardust (coming may 24th)": {
 		path: "short-stories/echoes-in-stardust/echoes-in-stardust.html",
 		releaseDate: "TBD"
 	},

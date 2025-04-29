@@ -19,22 +19,45 @@ function playPoemAudio(titleSlug) {
 		});
 }
 
-function insertRatingElement() {
+async function insertRatingElement() {
 	const poemContainer = document.querySelector(".poem-container");
 	const poemTitleElement = document.querySelector(".poem-title");
 
 	if (!poemContainer || !poemTitleElement) {
-		console.error("⚠️ No .poem-container or .poem-title found on page.");
+		console.error("⚠️ No .poem-container or .poem-title found.");
 		return;
 	}
 
-	const poemTitle = poemTitleElement.textContent.trim(); // 🧠 Grab the title text
+	const poemTitle = poemTitleElement.textContent.trim();
+	let userId = null;
+	let currentRating = 0;
+	let currentComment = "";
 
+	// Step 1: Check session
+	try {
+		const sessionRes = await fetch("https://backend-bzip.onrender.com/api/check-session", {
+			method: "POST",
+			credentials: "include",
+		});
+		const sessionData = await sessionRes.json();
+
+		if (sessionData.loggedIn) {
+			userId = sessionData.user.id;
+		}
+	} catch (err) {
+		console.warn("⚠️ Could not confirm session.");
+	}
+
+	// Step 2: Create rating div
 	const ratingDiv = document.createElement("div");
 	ratingDiv.className = "rating-widget";
 
 	const title = document.createElement("h3");
 	title.textContent = "Rate This Poem";
+
+	const avgRatingSpan = document.createElement("span");
+	avgRatingSpan.className = "average-rating";
+	title.appendChild(avgRatingSpan); // Will be updated later
 
 	const starsContainer = document.createElement("div");
 	starsContainer.className = "stars";
@@ -45,14 +68,15 @@ function insertRatingElement() {
 		star.innerHTML = "&#9733;";
 		star.dataset.value = i;
 
-		star.addEventListener("mouseover", () => {
-			highlightStars(i);
-		});
-		star.addEventListener("mouseout", () => {
-			highlightStars(currentRating);
-		});
+		star.addEventListener("mouseover", () => highlightStars(i));
+		star.addEventListener("mouseout", () => highlightStars(currentRating));
 		star.addEventListener("click", () => {
+			if (!userId) {
+				alert("You must be logged in to rate.");
+				return;
+			}
 			currentRating = i;
+			highlightStars(currentRating);
 		});
 
 		starsContainer.appendChild(star);
@@ -66,12 +90,37 @@ function insertRatingElement() {
 	submitButton.className = "btn btn-primary mt-2";
 	submitButton.textContent = "Submit Rating";
 
-	submitButton.addEventListener("click", () => {
-		alert(`You rated "${poemTitle}" with ${currentRating} stars!\nComment: ${commentInput.value}`);
-		// Later when backend is ready, we send this to your API endpoint
-	});
+	submitButton.addEventListener("click", async () => {
+		if (!userId) {
+			alert("Please log in to submit a rating.");
+			return;
+		}
 
-	let currentRating = 0;
+		const payload = {
+			poemTitle,
+			rating: currentRating,
+			comment: commentInput.value.trim()
+		};
+
+		try {
+			const res = await fetch("https://backend-bzip.onrender.com/api/rate-poem", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				credentials: "include",
+				body: JSON.stringify(payload),
+			});
+
+			const data = await res.json();
+			if (data.success) {
+				alert("✅ Rating submitted!");
+				updateAverageRating();
+			} else {
+				alert("❌ Failed to submit rating.");
+			}
+		} catch (err) {
+			alert("❌ Error submitting rating.");
+		}
+	});
 
 	function highlightStars(rating) {
 		const stars = starsContainer.querySelectorAll(".star");
@@ -88,8 +137,47 @@ function insertRatingElement() {
 	ratingDiv.appendChild(starsContainer);
 	ratingDiv.appendChild(commentInput);
 	ratingDiv.appendChild(submitButton);
+	poemContainer.appendChild(ratingDiv);
 
-	poemContainer.appendChild(ratingDiv); // ⬅️ Add widget to every poem page automatically
+	// Step 3: Fetch user rating if logged in
+	if (userId) {
+		try {
+			const res = await fetch("https://backend-bzip.onrender.com/api/user-rating", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				credentials: "include",
+				body: JSON.stringify({ poemTitle }),
+			});
+			const data = await res.json();
+			if (data.success && data.rating) {
+				currentRating = data.rating.rating;
+				commentInput.value = data.rating.comment || "";
+				highlightStars(currentRating);
+			}
+		} catch (err) {
+			console.warn("⚠️ Failed to load user rating.");
+		}
+	}
+
+	// Step 4: Show average rating
+	async function updateAverageRating() {
+		try {
+			const res = await fetch("https://backend-bzip.onrender.com/api/average-rating", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ poemTitle }),
+			});
+			const data = await res.json();
+			if (data.success && data.average !== null) {
+				avgRatingSpan.textContent = ` – ${data.average.toFixed(1)} / 5 ⭐`;
+			}
+		} catch (err) {
+			console.warn("⚠️ Could not fetch average rating.");
+		}
+	}
+
+	updateAverageRating(); // Call it initially
 }
+
 
 insertRatingElement();
