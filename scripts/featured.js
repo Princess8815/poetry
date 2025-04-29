@@ -179,14 +179,32 @@ function getRandomTitles(arr, n) {
 	const shuffled = [...arr].sort(() => 0.5 - Math.random());
 	return shuffled.slice(0, n);
 }
-function renderTitles(containerId, count = null) {
+
+async function fetchAverageRating(poemTitle) {
+	try {
+		const response = await fetch("https://backend-bzip.onrender.com/api/average-rating", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ poemTitle }),
+		});
+		const data = await response.json();
+		if (data.success && data.average !== null) {
+			return parseFloat(data.average);
+		}
+	} catch (err) {
+		console.warn("Failed to fetch rating for:", poemTitle, err);
+	}
+	return null;
+}
+
+
+async function renderTitles(containerId, count = null) {
 	const container = document.getElementById(containerId);
 	if (!container) return;
 
-	// Start with all entries
 	let entries = Object.entries(titleLinks);
 
-	// 🌟 Filter poetry only
+	// Filter for page type
 	if (document.body.classList.contains("poetry-page")) {
 		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("poetry/"));
 	} else if (document.body.classList.contains("short-stories-page")) {
@@ -195,56 +213,58 @@ function renderTitles(containerId, count = null) {
 		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("books/"));
 	}
 
-	// 1. FILTER by category (tag)
-// 1. FILTER by category (tag)
+	// Filter by tag
 	if (currentFilter) {
 		entries = entries.filter(([_, data]) => {
-			if (typeof data.tag === "string") {
-				return data.tag === currentFilter;
-			}
-			if (Array.isArray(data.tags)) {
-				return data.tags.includes(currentFilter);
-			}
+			if (typeof data.tag === "string") return data.tag === currentFilter;
+			if (Array.isArray(data.tags)) return data.tags.includes(currentFilter);
 			return false;
 		});
 	}
 
-
-	// 2. SEARCH by title
-	if (currentSearch.trim() !== "") {
+	// Search by title
+	if (currentSearch.trim()) {
 		const searchLower = currentSearch.trim().toLowerCase();
-		entries = entries.filter(([title, _]) => title.toLowerCase().includes(searchLower));
+		entries = entries.filter(([title]) => title.toLowerCase().includes(searchLower));
 	}
 
-	// 3. SORT
+	// Fetch ratings in parallel
+	const ratings = await Promise.all(entries.map(([title]) => fetchAverageRating(title)));
+	entries = entries.map(([title, data], index) => {
+		data.avgRating = ratings[index];
+		return [title, data];
+	});
+
+	// Sort
 	if (currentSort === "titleAsc") {
-		entries.sort(([aTitle], [bTitle]) => aTitle.localeCompare(bTitle));
+		entries.sort(([a], [b]) => a.localeCompare(b));
 	} else if (currentSort === "titleDesc") {
-		entries.sort(([aTitle], [bTitle]) => bTitle.localeCompare(aTitle));
+		entries.sort(([a], [b]) => b.localeCompare(a));
 	} else if (currentSort === "dateAsc") {
-		entries.sort(([_, aData], [__, bData]) => new Date(aData.releaseDate) - new Date(bData.releaseDate));
+		entries.sort(([, a], [, b]) => new Date(a.releaseDate) - new Date(b.releaseDate));
 	} else if (currentSort === "dateDesc") {
-		entries.sort(([_, aData], [__, bData]) => new Date(bData.releaseDate) - new Date(aData.releaseDate));
+		entries.sort(([, a], [, b]) => new Date(b.releaseDate) - new Date(a.releaseDate));
+	} else if (currentSort === "ratingAsc") {
+		entries.sort(([, a], [, b]) => (a.avgRating ?? 0) - (b.avgRating ?? 0));
+	} else if (currentSort === "ratingDesc") {
+		entries.sort(([, a], [, b]) => (b.avgRating ?? 0) - (a.avgRating ?? 0));
 	}
 
-	// 4. LIMIT (random pick)
+	// Limit if needed
 	if (count && count > 0) {
 		entries = getRandomTitles(entries, count);
 	}
 
-	// 5. CLEAR then REBUILD
+	// Clear and rebuild
 	container.innerHTML = "";
 	entries.forEach(([title, data]) => {
 		let adjustedPath = data.path;
 		const releaseDate = data.releaseDate || "Unknown";
+		const avgRating = data.avgRating != null ? `${data.avgRating.toFixed(1)} / 5 ⭐` : "No rating yet";
 
-		if (document.body.classList.contains("poetry-page") && adjustedPath.startsWith("poetry/")) {
-			adjustedPath = adjustedPath.replace("poetry/", "");
-		} else if (document.body.classList.contains("short-stories-page") && adjustedPath.startsWith("short-stories/")) {
-			adjustedPath = adjustedPath.replace("short-stories/", "../short-stories/");
-		} else if (document.body.classList.contains("books-page") && adjustedPath.startsWith("books/")) {
-			adjustedPath = adjustedPath.replace("books/", "../books/");
-		}
+		if (document.body.classList.contains("poetry-page")) adjustedPath = adjustedPath.replace("poetry/", "");
+		else if (document.body.classList.contains("short-stories-page")) adjustedPath = adjustedPath.replace("short-stories/", "../short-stories/");
+		else if (document.body.classList.contains("books-page")) adjustedPath = adjustedPath.replace("books/", "../books/");
 
 		const card = document.createElement("div");
 		card.className = "col-md-4 mb-4";
@@ -253,6 +273,7 @@ function renderTitles(containerId, count = null) {
 				<div class="card-body">
 					<h5 class="card-title">${title}</h5>
 					<p class="card-text"><small>Release: ${releaseDate}</small></p>
+					<p class="card-text text-muted">Average Rating: ${avgRating}</p>
 					<a href="${adjustedPath}" class="btn btn-outline-primary">Read Now</a>
 				</div>
 			</div>
@@ -260,6 +281,7 @@ function renderTitles(containerId, count = null) {
 		container.appendChild(card);
 	});
 }
+
 
 
 
