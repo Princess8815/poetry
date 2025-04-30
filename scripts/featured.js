@@ -13,17 +13,17 @@ const titleLinks = {
 	//"Whispers Beneath the Rain": "short-stories/whispers-beneath-the-rain.html",
 
 	// Poetry (your 31)
-	"More Then a Word (new)": {
+	"More Then a Word": {
 		path: "poetry/more-then-a-word.html",
 		releaseDate: "2025-04-26",
 		tag: "inspirational"
 	},
-	"The Playful Pooch (new)": {
+	"The Playful Pooch": {
 		path: "poetry/the-playful-pooch.html",
 		releaseDate: "2025-04-26",
 		tag: "comedy"
 	},
-	"Endless Scream (new)": {
+	"Endless Scream": {
 		path: "poetry/endless-scream.html",
 		releaseDate: "2025-04-26",
 		tag: "inspirational"
