@@ -54,6 +54,12 @@ async function insertRatingElement() {
 
 	async function fetchAndDisplayRatings(poemTitle) {
 		try {
+
+			const existingAvg = ratingDiv.querySelector(".average-rating");
+			if (existingAvg) {
+				existingAvg.remove();
+			}
+
 		  const response = await fetch(`https://backend-bzip.onrender.com/api/poem-rating?poemTitle=${encodeURIComponent(poemTitle)}`, {
 			method: "GET",
 			credentials: "include",
