@@ -153,6 +153,18 @@ async function insertRatingElement() {
 		  alert("An error occurred while submitting your rating.");
 		}
 	  });
+
+	const viewReviewsButton = document.createElement("button");
+	viewReviewsButton.className = "btn btn-outline-secondary mt-3";
+	viewReviewsButton.textContent = "View All Reviews";
+
+	viewReviewsButton.addEventListener("click", () => {
+		// Redirect to a new page with query param
+		window.location.href = `../pages/reviews.html?poem=${encodeURIComponent(poemTitle)}`;
+	});
+
+	ratingDiv.appendChild(viewReviewsButton);
+
 	  
 
 	function highlightStars(rating) {
