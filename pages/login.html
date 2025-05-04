@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Login</title>
+	<link rel="stylesheet" href="../styles/main.css" />
+	<link rel="stylesheet" href="../styles/poetry.css" />
+	<script src="../scripts/contrast.js" defer></script>
+	<script src="../scripts/login.js" defer></script> <!-- 💬 HERE -->
+</head>
+<body class="login">
+	<a href="../index.html" class="home-button">🏠 Home</a>
+
+	<div class="poem-container">
+		<h1 class="poem-title">Login</h1>
+		<form id="loginForm">
+			<div class="mb-3">
+				<input type="email" id="email" placeholder="Email" required class="form-control" />
+			</div>
+			<div class="mb-3">
+				<input type="password" id="password" placeholder="Password" required class="form-control" />
+			</div>
+			<button type="submit" class="btn btn-success w-100">Login</button>
+		</form>
+		<div id="loginMessage" class="mt-3 text-center"></div>
+	</div>
+</body>
+</html>
