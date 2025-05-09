@@ -12,7 +12,13 @@ const titleLinks = {
 	//"Of Fire and Ink": "short-stories/of-fire-and-ink.html",
 	//"Whispers Beneath the Rain": "short-stories/whispers-beneath-the-rain.html",
 
-	// Poetry (your 33)
+	// Poetry (your 34)
+	"Will It Be Worth It": {
+		path: "poetry/will-it-be-worth-it.html",
+		releaseDate: "2025-05-10",
+		tag: "inspirational"
+	},
+
 	"Can You Hear Me": {
 		path: "poetry/can-you-hear-me.html",
 		releaseDate: "2025-05-03",

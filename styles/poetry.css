@@ -139,21 +139,38 @@
 	top: 20px;
 	left: 35%;
 	transform: translateX(-50%);
-  
-	background: #ffffffcc; /* translucent white */
+
+	background: #ffffffcc;
 	border: 2px solid #d63384;
 	border-radius: 12px;
 	padding: 1rem 2rem;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  
+
 	display: flex;
 	flex-direction: row;
 	gap: 1rem;
 	justify-content: center;
-  
+
 	z-index: 1000;
 	text-align: center;
-  }
+}
+
+/* ✅ MOBILE STYLES */
+@media (max-width: 768px) {
+	#auth-buttons {
+		position: static; /* Disable absolute positioning */
+		transform: none;
+		margin: 1rem auto 0 auto;
+		width: fit-content;
+
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1rem;
+	}
+}
+
+  
   
   
   
