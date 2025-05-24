@@ -3,7 +3,7 @@ const titleLinks = {
 	// Short Stories (original 6)
 	"Echoes in Stardust (coming may 24th)": {
 		path: "short-stories/echoes-in-stardust/echoes-in-stardust.html",
-		releaseDate: "TBD"
+		releaseDate: "2025-05-24"
 	},
 
 	//"The Midnight Petal": "short-stories/the-midnight-petal.html",
@@ -191,7 +191,22 @@ const titleLinks = {
 		path: "poetry/5-piggies-adult.html",
 		releaseDate: "2025-04-17",
 		tag: "adult"
-	}
+	},
+
+	//landing
+	"Funny Advertisements": {
+		path: "funnies/advertisements-landing.html",
+		releaseDate: "2025-05-24",
+		tag: "adult"
+	},
+
+	//funny ads
+	"slimblaze": {
+		path: "advertisements/slimblaze.html",
+		releaseDate: "2025-05-24",
+		tag: "adult"
+	},
+
 };
 
 let currentSearch = "";
@@ -235,7 +250,11 @@ async function renderTitles(containerId, count = null) {
 		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("short-stories/"));
 	} else if (document.body.classList.contains("books-page")) {
 		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("books/"));
-	}
+	} else if (document.body.classList.contains("funnies-page")) {
+		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("funnies/"));
+	} else if (document.body.classList.contains("ad-page")) {
+		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("advertisements/"));
+	} 
 
 	// Filter by tag
 	if (currentFilter) {
@@ -289,6 +308,8 @@ async function renderTitles(containerId, count = null) {
 		if (document.body.classList.contains("poetry-page")) adjustedPath = adjustedPath.replace("poetry/", "");
 		else if (document.body.classList.contains("short-stories-page")) adjustedPath = adjustedPath.replace("short-stories/", "../short-stories/");
 		else if (document.body.classList.contains("books-page")) adjustedPath = adjustedPath.replace("books/", "../books/");
+		else if (document.body.classList.contains("funnies-page")) adjustedPath = adjustedPath.replace("funnies/", "../funnies/");
+		else if (document.body.classList.contains("ad-page")) adjustedPath = adjustedPath.replace("advertisements/", "./advertisements/");
 
 		const card = document.createElement("div");
 		card.className = "col-md-4 mb-4";
@@ -310,26 +331,33 @@ async function renderTitles(containerId, count = null) {
 
 
 window.onload = () => {
-
-	const sortSelect = document.getElementById("sortOptions"); // ← missing before
+	const sortSelect = document.getElementById("sortOptions");
 	const searchInput = document.getElementById("searchInput");
 	const searchButton = document.getElementById("searchButton");
 	const filterSelect = document.getElementById("filterOptions");
-
 
 	const featuredContainer = document.getElementById("featured-titles");
 	const isPoetryPage = document.body.classList.contains("poetry-page");
 	const isStoriesPage = document.body.classList.contains("short-stories-page");
 	const isBooksPage = document.body.classList.contains("books-page");
 	const isFunniesPage = document.body.classList.contains("funnies-page");
+	const isAdPage = document.body.classList.contains("ad-page");
 
-	// Render initial page
+	// Render only advertisement cards on funnies-page
+	if (featuredContainer && isFunniesPage) {
+		renderTitles("featured-titles", path => /^advertisements\/[^/]+\.html$/.test(path));
+		return; // ← prevent other rendering
+	}
+
+	// Render ads page
+	if (featuredContainer && isAdPage) {
+		renderTitles("featured-titles", path => /^advertisements\/[^/]+\.html$/.test(path));
+		return;
+	}
+
+	// Default page rendering
 	if (featuredContainer) {
-		if (isPoetryPage) {
-			renderTitles("featured-titles");
-		} else if (isStoriesPage) {
-			renderTitles("featured-titles");
-		} else if (isBooksPage) {
+		if (isPoetryPage || isStoriesPage || isBooksPage) {
 			renderTitles("featured-titles");
 		} else {
 			renderTitles("featured-titles", 3);
@@ -337,17 +365,16 @@ window.onload = () => {
 	}
 
 	// Setup Search
-
 	if (searchInput && searchButton) {
 		searchButton.addEventListener("click", () => {
 			currentSearch = searchInput.value;
-			currentFilter = ""; // ← Clear filter
+			currentFilter = "";
 			renderTitles("featured-titles");
 		});
 		searchInput.addEventListener("keypress", (e) => {
 			if (e.key === "Enter") {
 				currentSearch = searchInput.value;
-				currentFilter = ""; // ← Clear filter
+				currentFilter = "";
 				renderTitles("featured-titles");
 			}
 		});
@@ -365,18 +392,11 @@ window.onload = () => {
 	if (filterSelect) {
 		filterSelect.addEventListener("change", () => {
 			currentFilter = filterSelect.value;
-			currentSearch = ""; // ← Clear search
+			currentSearch = "";
 			renderTitles("featured-titles");
 		});
 	}
-
-	if (featuredContainer && isFunniesPage) {
-		renderTitles("featured-titles", path => /^funnies\/[^/]+\.html$/.test(path));
-	}
-
-	if (featuredContainer && isAdPage) {
-		renderTitles("featured-titles", path => /^advertisements\/[^/]+\.html$/.test(path));
-	}
 };
+
 
 
