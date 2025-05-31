@@ -12,7 +12,14 @@ const titleLinks = {
 	//"Of Fire and Ink": "short-stories/of-fire-and-ink.html",
 	//"Whispers Beneath the Rain": "short-stories/whispers-beneath-the-rain.html",
 
-	// Poetry (your 35)
+	// Poetry (your 36)
+
+	"Even The Strongest May Fall": {
+		path: "poetry/even-the-strongest-may-fall.html",
+		releaseDate: "2025-05-31",
+		tag: "inspirational"
+	},
+
 	"A Girl Unseen": {
 		path: "poetry/a-girl-unseen.html",
 		releaseDate: "2025-05-10",
