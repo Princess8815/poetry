@@ -6,7 +6,7 @@ const titleLinks = {
 		releaseDate: "2025-05-24"
 	},
 
-	//"The Midnight Petal": "short-stories/the-midnight-petal.html",
+	//"The Midnight Petal": "short-stories/the-midnight-petal.html", //story is about a girl left disabled by a dark sorcerer who killed her family. She finds a magical flower that grants her the ability to walk again, but at a cost. this flower is known as the midnight petal, and it only blooms at midnight. She must decide whether to use its power to seek revenge on the sorcerer or to let go of her past and embrace her new life.
 	//"Threadbare Hearts": "short-stories/threadbare-hearts.html",
 	//"Letters Never Sent": "short-stories/letters-never-sent.html",
 	//"Of Fire and Ink": "short-stories/of-fire-and-ink.html",
