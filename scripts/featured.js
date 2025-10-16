@@ -12,7 +12,13 @@ const titleLinks = {
 	//"Of Fire and Ink": "short-stories/of-fire-and-ink.html",
 	//"Whispers Beneath the Rain": "short-stories/whispers-beneath-the-rain.html",
 
-	// Poetry (your 37)
+	// Poetry (your 38)
+
+	"Live or die": {
+		path: "poetry/live-or-die.html",
+		releaseDate: "2025-10-16",
+		tag: "inspirational"
+	},
 
 	"Let Us Be": {
 		path: "poetry/let-us-be.html",
