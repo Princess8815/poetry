@@ -12,7 +12,62 @@ const titleLinks = {
 	//"Of Fire and Ink": "short-stories/of-fire-and-ink.html",
 	//"Whispers Beneath the Rain": "short-stories/whispers-beneath-the-rain.html",
 
-	// Poetry (your 38)
+	// Poetry (your 47)
+
+
+	"Fade Away": {
+		path: "poetry/fade-away.html",
+		releaseDate: "2025-10-27",
+		tag: "inspirational"
+	},
+
+	"The Journey To Me": {
+		path: "poetry/the-journey-to-me.html",
+		releaseDate: "2025-10-27",
+		tag: "inspirational"
+	},
+
+	"No Kings": {
+		path: "poetry/no-kings.html",
+		releaseDate: "2025-10-27",
+		tag: "inspirational"
+	},
+
+	"When Lables Fade": {
+		path: "poetry/when-lables-fade.html",
+		releaseDate: "2025-10-27",
+		tag: "inspirational"
+	},
+
+	"Not The Danger ": {
+		path: "poetry/not-the-danger.html",
+		releaseDate: "2025-10-27",
+		tag: "inspirational"
+	},
+
+	"Made of Starlight And Static": {
+		path: "poetry/made-of-starlight-and-static.html",
+		releaseDate: "2025-10-27",
+		tag: "inspirational"
+	},
+
+	"The Weight of Every Soul": {
+		path: "poetry/the-weight-of-every-soul.html",
+		releaseDate: "2025-10-27",
+		tag: "inspirational"
+	},
+
+	"I Carry What I Feel": {
+		path: "poetry/i-carry-what-i-feel.html",
+		releaseDate: "2025-10-27",
+		tag: "inspirational"
+	},
+
+	"Becomming Her": {
+		path: "poetry/becomming-her.html",
+		releaseDate: "2025-10-27",
+		tag: "inspirational"
+	},
 
 	"Live or die": {
 		path: "poetry/live-or-die.html",
