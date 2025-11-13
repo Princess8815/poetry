@@ -20,10 +20,19 @@ function playPoemAudio(titleSlug) {
 }
 
 function resolvePoemDataPath() {
-        const segments = window.location.pathname.split("/").filter(Boolean);
-        const depth = segments.length > 0 ? segments.length - 1 : 0;
-        return `${"../".repeat(depth)}data/poems.json`;
+    const host = window.location.hostname;
+    const isLocal = host === "127.0.0.1" || host === "localhost";
+
+    // Local (VS Code Live Server)
+    if (isLocal) {
+        // When viewing pages like /poetry/poem.html, the data folder is one level up
+        return "../data/poems.json";
+    }
+
+    // GitHub Pages (princess8815.github.io/poetry/...)
+    return `${window.location.origin}/poetry/data/poems.json`;
 }
+
 
 function getSlugFromLocation() {
         const url = new URL(window.location.href);
