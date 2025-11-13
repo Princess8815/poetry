@@ -407,4 +407,4 @@ async function insertRatingElement() {
 	}
 
 }
-}
+
