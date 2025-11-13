@@ -23,10 +23,19 @@ let poemsLoaded = false;
 let poemsLoadPromise = null;
 
 function resolvePoemDataPath() {
-        const segments = window.location.pathname.split("/").filter(Boolean);
-        const depth = segments.length > 0 ? segments.length - 1 : 0;
-        return `${"../".repeat(depth)}data/poems.json`;
+    const host = window.location.hostname;
+    const isLocal = host === "127.0.0.1" || host === "localhost";
+
+    // If local, data is one level up from /poetry/
+    if (isLocal) {
+        return "../data/poems.json";
+    }
+
+    // On GitHub Pages, data lives inside /poetry/data/
+    return `${window.location.origin}/poetry/data/poems.json`;
 }
+
+
 
 async function ensurePoemsLoaded() {
         if (poemsLoaded) return;
