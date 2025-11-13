@@ -1,23 +1,206 @@
 function playPoemAudio(titleSlug) {
-	const audioPath = `../audio/${titleSlug}.mp3`;
+        const audioPath = `../audio/${titleSlug}.mp3`;
 
-	// Check if the file exists first
-	fetch(audioPath, { method: "HEAD" })
-		.then(response => {
-			if (response.ok) {
-				// Only create audio if it exists
-				const audio = new Audio(audioPath);
-				audio.play().catch(() => {
-					alert("Audio is unavailable for this story.");
-				});
-			} else {
-				alert("Audio is unavailable for this story.");
-			}
-		})
-		.catch(() => {
-			alert("Audio is unavailable for this story.");
-		});
+        // Check if the file exists first
+        fetch(audioPath, { method: "HEAD" })
+                .then(response => {
+                        if (response.ok) {
+                                // Only create audio if it exists
+                                const audio = new Audio(audioPath);
+                                audio.play().catch(() => {
+                                        alert("Audio is unavailable for this story.");
+                                });
+                        } else {
+                                alert("Audio is unavailable for this story.");
+                        }
+                })
+                .catch(() => {
+                        alert("Audio is unavailable for this story.");
+                });
 }
+
+function resolvePoemDataPath() {
+        const segments = window.location.pathname.split("/").filter(Boolean);
+        const depth = segments.length > 0 ? segments.length - 1 : 0;
+        return `${"../".repeat(depth)}data/poems.json`;
+}
+
+function getSlugFromLocation() {
+        const url = new URL(window.location.href);
+        const paramSlug = url.searchParams.get("slug");
+        if (paramSlug) {
+                return paramSlug;
+        }
+
+        const pathMatch = window.location.pathname.match(/\/poetry\/(?:poetry\/)?([^/]+)\.html$/);
+        return pathMatch ? pathMatch[1] : null;
+}
+
+function formatReleaseDate(dateString) {
+        if (!dateString) return "";
+        const date = new Date(dateString);
+        if (Number.isNaN(date.valueOf())) return "";
+        return date.toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+        });
+}
+
+async function loadPoemFromJson() {
+        const container = document.querySelector(".poem-container");
+        if (!container) return;
+
+        const titleElement = container.querySelector(".poem-title");
+        const contentElement = container.querySelector(".poem-content");
+        const metaElement = container.querySelector(".poem-meta");
+        const releaseElement = container.querySelector(".poem-release-date");
+        const tagsElement = container.querySelector(".poem-tags");
+        const errorElement = container.querySelector(".poem-error");
+        const audioButton = document.getElementById("poem-audio-button");
+
+        const slug = getSlugFromLocation();
+
+        if (!slug) {
+                if (errorElement) {
+                        errorElement.hidden = false;
+                        errorElement.textContent = "No poem specified. Please select a poem from the poetry list.";
+                }
+                if (contentElement) {
+                        contentElement.textContent = "";
+                }
+                if (releaseElement) {
+                        releaseElement.textContent = "";
+                        releaseElement.hidden = true;
+                }
+                if (tagsElement) {
+                        tagsElement.textContent = "";
+                        tagsElement.hidden = true;
+                }
+                if (metaElement) {
+                        metaElement.hidden = true;
+                }
+                if (audioButton) {
+                        audioButton.disabled = true;
+                        audioButton.setAttribute("aria-disabled", "true");
+                        audioButton.onclick = null;
+                }
+                return;
+        }
+
+        try {
+                const dataPath = resolvePoemDataPath();
+                const response = await fetch(dataPath);
+                if (!response.ok) {
+                        throw new Error("Failed to load poems data.");
+                }
+
+                const data = await response.json();
+                const poems = Array.isArray(data?.poems) ? data.poems : [];
+                const poem = poems.find(entry => entry.slug === slug);
+
+                if (!poem) {
+                        if (errorElement) {
+                                errorElement.hidden = false;
+                                errorElement.textContent = "We couldn't find that poem. Please return to the poetry page and try again.";
+                        }
+                        if (contentElement) {
+                                contentElement.textContent = "";
+                        }
+                        if (releaseElement) {
+                                releaseElement.textContent = "";
+                                releaseElement.hidden = true;
+                        }
+                        if (tagsElement) {
+                                tagsElement.textContent = "";
+                                tagsElement.hidden = true;
+                        }
+                        if (metaElement) {
+                                metaElement.hidden = true;
+                        }
+                        if (audioButton) {
+                                audioButton.disabled = true;
+                                audioButton.setAttribute("aria-disabled", "true");
+                                audioButton.onclick = null;
+                        }
+                        return;
+                }
+
+                if (titleElement) {
+                        titleElement.textContent = poem.title || slug;
+                }
+                document.title = poem.title ? `${poem.title} | Kirstin's Poetry` : document.title;
+
+                if (contentElement) {
+                        contentElement.textContent = poem.content || "";
+                }
+
+                let hasRelease = false;
+                if (releaseElement) {
+                        const formattedDate = formatReleaseDate(poem.releaseDate);
+                        releaseElement.textContent = formattedDate ? `Released ${formattedDate}` : "";
+                        releaseElement.hidden = !formattedDate;
+                        hasRelease = Boolean(formattedDate);
+                }
+
+                let hasTags = false;
+                if (tagsElement) {
+                        if (Array.isArray(poem.tags) && poem.tags.length > 0) {
+                                tagsElement.textContent = `Tags: ${poem.tags.join(", ")}`;
+                                tagsElement.hidden = false;
+                                hasTags = true;
+                        } else {
+                                tagsElement.hidden = true;
+                                tagsElement.textContent = "";
+                        }
+                }
+
+                if (metaElement) {
+                        metaElement.hidden = !hasRelease && !hasTags;
+                }
+
+                if (errorElement) {
+                        errorElement.hidden = true;
+                        errorElement.textContent = "";
+                }
+
+                if (audioButton) {
+                        const audioSlug = poem.audioSlug || poem.slug || slug;
+                        audioButton.disabled = false;
+                        audioButton.setAttribute("aria-disabled", "false");
+                        audioButton.onclick = () => playPoemAudio(audioSlug);
+                }
+
+                insertRatingElement();
+        } catch (error) {
+                console.error("Failed to load poem:", error);
+                if (errorElement) {
+                        errorElement.hidden = false;
+                        errorElement.textContent = "Something went wrong while loading this poem. Please try again later.";
+                }
+                if (contentElement) {
+                        contentElement.textContent = "";
+                }
+                if (releaseElement) {
+                        releaseElement.textContent = "";
+                        releaseElement.hidden = true;
+                }
+                if (tagsElement) {
+                        tagsElement.textContent = "";
+                        tagsElement.hidden = true;
+                }
+                if (metaElement) {
+                        metaElement.hidden = true;
+                }
+                if (audioButton) {
+                        audioButton.disabled = true;
+                        audioButton.setAttribute("aria-disabled", "true");
+                        audioButton.onclick = null;
+                }
+        }
+}
+
+document.addEventListener("DOMContentLoaded", loadPoemFromJson);
 
 async function insertRatingElement() {
 	const poemContainer = document.querySelector(".poem-container");
@@ -28,10 +211,19 @@ async function insertRatingElement() {
 		return;
 	}
 
-	const poemTitle = poemTitleElement.textContent.trim();
-	let userId = null;
-	let currentRating = 0;
-	let currentComment = "";
+        const poemTitle = poemTitleElement.textContent.trim();
+        const poemTitleLower = poemTitle.toLowerCase();
+        if (!poemTitle || poemTitleLower === "loading…" || poemTitleLower === "loading...") {
+                return;
+        }
+
+        const existingWidget = poemContainer.querySelector(".rating-widget");
+        if (existingWidget) {
+                existingWidget.remove();
+        }
+
+        let userId = null;
+        let currentRating = 0;
 
 	// Step 1: Check session
 	try {
@@ -52,48 +244,50 @@ async function insertRatingElement() {
 	const ratingDiv = document.createElement("div");
 	ratingDiv.className = "rating-widget";
 
-	async function fetchAndDisplayRatings(poemTitle) {
-		try {
+        async function fetchAndDisplayRatings(poemTitle) {
+                try {
+                        const response = await fetch(`https://backend-bzip.onrender.com/api/poem-rating?poemTitle=${encodeURIComponent(poemTitle)}`, {
+                                method: "GET",
+                                credentials: "include",
+                        });
+                        const data = await response.json();
 
-			const existingAvg = ratingDiv.querySelector(".average-rating");
-			if (existingAvg) {
-				existingAvg.remove();
-			}
+                        if (data.success) {
+                                if (data.average !== null) {
+                                        avgRatingSpan.textContent = ` – ${Number(data.average).toFixed(1)} / 5 ⭐`;
+                                } else {
+                                        avgRatingSpan.textContent = " – No ratings yet";
+                                }
 
-		  const response = await fetch(`https://backend-bzip.onrender.com/api/poem-rating?poemTitle=${encodeURIComponent(poemTitle)}`, {
-			method: "GET",
-			credentials: "include",
-		  });
-		  const data = await response.json();
-	  
-		  if (data.success) {
-			if (data.average !== null) {
-			  const averageDisplay = document.createElement("p");
-			  averageDisplay.className = "average-rating";
-			  averageDisplay.textContent = `Average Rating: ${data.average} / 5`;
-			  ratingDiv.insertBefore(averageDisplay, ratingDiv.firstChild);
-			}
-	  
-			if (data.userRating) {
-			  currentRating = data.userRating.rating;
-			  highlightStars(currentRating);
-			  commentInput.value = data.userRating.comment || "";
-			}
-		  } else {
-			console.warn("Could not fetch average rating.");
-		  }
-		} catch (err) {
-		  console.error("Error fetching ratings:", err);
-		}
-	  }
+                                if (data.userRating) {
+                                        currentRating = data.userRating.rating;
+                                        highlightStars(currentRating);
+                                        commentInput.value = data.userRating.comment || "";
+                                } else {
+                                        currentRating = 0;
+                                        highlightStars(currentRating);
+                                        commentInput.value = "";
+                                }
+                        } else {
+                                console.warn("Could not fetch average rating.");
+                                avgRatingSpan.textContent = " – Ratings unavailable";
+                        }
+                } catch (err) {
+                        console.error("Error fetching ratings:", err);
+                        avgRatingSpan.textContent = " – Ratings unavailable";
+                        currentRating = 0;
+                        highlightStars(currentRating);
+                }
+        }
 	  
 
 	const title = document.createElement("h3");
 	title.textContent = "Rate This Poem";
 
-	const avgRatingSpan = document.createElement("span");
-	avgRatingSpan.className = "average-rating";
-	title.appendChild(avgRatingSpan); // Will be updated later
+        const avgRatingSpan = document.createElement("span");
+        avgRatingSpan.className = "average-rating";
+        avgRatingSpan.textContent = "";
+        title.appendChild(avgRatingSpan);
 
 	const starsContainer = document.createElement("div");
 	starsContainer.className = "stars";
@@ -126,13 +320,23 @@ async function insertRatingElement() {
 	submitButton.className = "btn btn-primary mt-2";
 	submitButton.textContent = "Submit Rating";
 
-	submitButton.addEventListener("click", async () => {
-		try {
-		  const response = await fetch("https://backend-bzip.onrender.com/api/rate-poem", {
-			method: "POST",
-			credentials: "include",
-			headers: {
-			  "Content-Type": "application/json",
+        submitButton.addEventListener("click", async () => {
+                try {
+                  if (!userId) {
+                        alert("You must be logged in to rate.");
+                        return;
+                  }
+
+                  if (currentRating === 0) {
+                        alert("Please choose a star rating before submitting.");
+                        return;
+                  }
+
+                  const response = await fetch("https://backend-bzip.onrender.com/api/rate-poem", {
+                        method: "POST",
+                        credentials: "include",
+                        headers: {
+                          "Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 			  poemTitle,
@@ -163,26 +367,23 @@ async function insertRatingElement() {
 		window.location.href = `../pages/reviews.html?poem=${encodeURIComponent(poemTitle)}`;
 	});
 
-	ratingDiv.appendChild(viewReviewsButton);
-
-	  
-
-	function highlightStars(rating) {
-		const stars = starsContainer.querySelectorAll(".star");
-		stars.forEach((star, index) => {
-			if (index < rating) {
-				star.classList.add("highlighted");
+        function highlightStars(rating) {
+                const stars = starsContainer.querySelectorAll(".star");
+                stars.forEach((star, index) => {
+                        if (index < rating) {
+                                star.classList.add("highlighted");
 			} else {
 				star.classList.remove("highlighted");
 			}
 		});
 	}
 
-	ratingDiv.appendChild(title);
-	ratingDiv.appendChild(starsContainer);
-	ratingDiv.appendChild(commentInput);
-	ratingDiv.appendChild(submitButton);
-	poemContainer.appendChild(ratingDiv);
+        ratingDiv.appendChild(title);
+        ratingDiv.appendChild(starsContainer);
+        ratingDiv.appendChild(commentInput);
+        ratingDiv.appendChild(submitButton);
+        ratingDiv.appendChild(viewReviewsButton);
+        poemContainer.appendChild(ratingDiv);
 	fetchAndDisplayRatings(poemTitle);
 
 	// Step 3: Fetch user rating if logged in
@@ -205,25 +406,5 @@ async function insertRatingElement() {
 		}
 	}
 
-	// Step 4: Show average rating
-	async function updateAverageRating() {
-		try {
-			const res = await fetch("https://backend-bzip.onrender.com/api/average-rating", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ poemTitle }),
-			});
-			const data = await res.json();
-			if (data.success && data.average !== null) {
-				avgRatingSpan.textContent = ` – ${data.average.toFixed(1)} / 5 ⭐`;
-			}
-		} catch (err) {
-			console.warn("⚠️ Could not fetch average rating.");
-		}
-	}
-
-	updateAverageRating(); // Call it initially
 }
-
-
-insertRatingElement();
+}
