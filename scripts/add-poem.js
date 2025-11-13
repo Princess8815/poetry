@@ -1,4 +1,4 @@
-// Helper utility that lets you add or update poems without manually escaping newlines.
+// Simplified helper to add or update poems.
 // Usage: node scripts/add-poem.js
 const fs = require('fs');
 const path = require('path');
@@ -35,6 +35,14 @@ function parseTags(input) {
     .filter(Boolean);
 }
 
+function slugify(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // remove non-alphanumerics
+    .trim()
+    .replace(/\s+/g, '-'); // replace spaces with dashes
+}
+
 async function prompt(question, rl) {
   return new Promise(resolve => {
     rl.question(question, answer => resolve(answer.trim()));
@@ -43,7 +51,7 @@ async function prompt(question, rl) {
 
 async function promptMultiline(question, rl) {
   console.log(question);
-  console.log('Paste your poem text. When you are finished, enter a single line containing only "."');
+  console.log('Paste your poem text. When finished, enter a single line containing only "."');
 
   const lines = [];
   return new Promise(resolve => {
@@ -52,10 +60,7 @@ async function promptMultiline(question, rl) {
     rl.on('line', line => {
       if (line === '.') {
         rl.removeAllListeners('line');
-        resolve({
-          text: lines.join('\n'),
-          wasEmpty: lines.length === 0
-        });
+        resolve(lines.join('\n'));
         return;
       }
       lines.push(line);
@@ -67,42 +72,31 @@ async function promptMultiline(question, rl) {
 async function main() {
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
   rl.setPrompt('> ');
+
   try {
     const data = loadPoems();
-    const slug = await prompt('Slug (e.g. a-new-poem): ', rl);
-    if (!slug) {
-      throw new Error('Slug is required.');
-    }
+
+    const title = await prompt('Title: ', rl);
+    if (!title) throw new Error('Title is required.');
+
+    const slug = slugify(title);
+    const audioSlug = slug;
+    const releaseDate = new Date().toISOString().split('T')[0];
+
+    const tagsInput = await prompt('Tags (comma separated): ', rl);
+    const tags = parseTags(tagsInput);
+
+    const content = await promptMultiline('Enter poem content:', rl);
+    if (!content.trim()) throw new Error('Poem content cannot be empty.');
 
     const existingIndex = data.poems.findIndex(poem => poem.slug === slug);
-    let poem = existingIndex >= 0 ? data.poems[existingIndex] : {};
-
-    const title = await prompt(`Title${poem.title ? ` [${poem.title}]` : ''}: `, rl) || poem.title;
-    if (!title) {
-      throw new Error('Title is required.');
-    }
-
-    const releaseDate = await prompt(`Release date (YYYY-MM-DD)${poem.releaseDate ? ` [${poem.releaseDate}]` : ''}: `, rl) || poem.releaseDate || '';
-    const audioSlug = await prompt(`Audio slug${poem.audioSlug ? ` [${poem.audioSlug}]` : ''}: `, rl) || poem.audioSlug || slug;
-    const tagsInput = await prompt(`Tags, comma separated${Array.isArray(poem.tags) && poem.tags.length ? ` [${poem.tags.join(', ')}]` : ''}: `, rl);
-    const tags = tagsInput ? parseTags(tagsInput) : poem.tags || [];
-
-    const instructions = poem.content ?
-      'Enter new poem content, or just type "." on a blank line to keep the existing text.' :
-      'Enter poem content:';
-
-    const contentPrompt = instructions;
-    const { text: newContent, wasEmpty } = await promptMultiline(contentPrompt, rl);
-    const finalContent = wasEmpty && poem.content ? poem.content : newContent;
-
     const updatedPoem = {
-      ...poem,
       slug,
       title,
-      releaseDate: releaseDate || null,
+      releaseDate,
       audioSlug,
       tags,
-      content: finalContent
+      content
     };
 
     if (existingIndex >= 0) {
@@ -125,3 +119,4 @@ async function main() {
 }
 
 main();
+
