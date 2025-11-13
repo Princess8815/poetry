@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Poem</title>
+                <link rel="stylesheet" href="../styles/main.css" />
+                <link rel="stylesheet" href="../styles/poetry.css" />
+                <script src="../scripts/poetry.js" defer></script>
+                <script src="../scripts/auth.js" defer></script>
+        </head>
+        <body class="poem-page">
+                <a href="../index.html" class="home-button">🏠 Home</a>
+                <div class="poem-container" data-status="loading">
+                        <button class="audio-button" id="poem-audio-button" type="button" disabled aria-disabled="true" aria-label="Play audio">
+                                🔊
+                        </button>
+                        <h1 class="poem-title">Loading…</h1>
+                        <div class="poem-meta" hidden>
+                                <span class="poem-release-date"></span>
+                                <span class="poem-tags"></span>
+                        </div>
+                        <div class="poem-text">
+                                <pre class="poem-content">Loading poem…</pre>
+                        </div>
+                        <p class="poem-error" hidden></p>
+                </div>
+        </body>
+</html>

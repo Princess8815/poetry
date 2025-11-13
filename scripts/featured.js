@@ -1,476 +1,256 @@
-
-const titleLinks = {
-	// Short Stories (original 6)
-	"Echoes in Stardust (new)": {
-		path: "short-stories/echoes-in-stardust/echoes-in-stardust.html",
-		releaseDate: "2025-05-24"
-	},
-
-	//"The Midnight Petal": "short-stories/the-midnight-petal.html", //story is about a girl left disabled by a dark sorcerer who killed her family. She finds a magical flower that grants her the ability to walk again, but at a cost. this flower is known as the midnight petal, and it only blooms at midnight. She must decide whether to use its power to seek revenge on the sorcerer or to let go of her past and embrace her new life.
-	//"Threadbare Hearts": "short-stories/threadbare-hearts.html",
-	//"Letters Never Sent": "short-stories/letters-never-sent.html",
-	//"Of Fire and Ink": "short-stories/of-fire-and-ink.html",
-	//"Whispers Beneath the Rain": "short-stories/whispers-beneath-the-rain.html",
-
-	// Poetry (your 47)
-
-
-	"Fade Away": {
-		path: "poetry/fade-away.html",
-		releaseDate: "2025-10-27",
-		tag: "inspirational"
-	},
-
-	"The Journey To Me": {
-		path: "poetry/the-journey-to-me.html",
-		releaseDate: "2025-10-27",
-		tag: "inspirational"
-	},
-
-	"No Kings": {
-		path: "poetry/no-kings.html",
-		releaseDate: "2025-10-27",
-		tag: "inspirational"
-	},
-
-	"When Lables Fade": {
-		path: "poetry/when-lables-fade.html",
-		releaseDate: "2025-10-27",
-		tag: "inspirational"
-	},
-
-	"Not The Danger ": {
-		path: "poetry/not-the-danger.html",
-		releaseDate: "2025-10-27",
-		tag: "inspirational"
-	},
-
-	"Made of Starlight And Static": {
-		path: "poetry/made-of-starlight-and-static.html",
-		releaseDate: "2025-10-27",
-		tag: "inspirational"
-	},
-
-	"The Weight of Every Soul": {
-		path: "poetry/the-weight-of-every-soul.html",
-		releaseDate: "2025-10-27",
-		tag: "inspirational"
-	},
-
-	"I Carry What I Feel": {
-		path: "poetry/i-carry-what-i-feel.html",
-		releaseDate: "2025-10-27",
-		tag: "inspirational"
-	},
-
-	"Becomming Her": {
-		path: "poetry/becomming-her.html",
-		releaseDate: "2025-10-27",
-		tag: "inspirational"
-	},
-
-	"Live or die": {
-		path: "poetry/live-or-die.html",
-		releaseDate: "2025-10-16",
-		tag: "inspirational"
-	},
-
-	"Let Us Be": {
-		path: "poetry/let-us-be.html",
-		releaseDate: "2025-06-11",
-		tag: "inspirational"
-	},
-
-	"Even The Strongest May Fall": {
-		path: "poetry/even-the-strongest-may-fall.html",
-		releaseDate: "2025-05-31",
-		tag: "inspirational"
-	},
-
-	"A Girl Unseen": {
-		path: "poetry/a-girl-unseen.html",
-		releaseDate: "2025-05-10",
-		tag: "inspirational"
-	},
-
-	"Will It Be Worth It": {
-		path: "poetry/will-it-be-worth-it.html",
-		releaseDate: "2025-05-10",
-		tag: "inspirational"
-	},
-
-	"Can You Hear Me": {
-		path: "poetry/can-you-hear-me.html",
-		releaseDate: "2025-05-03",
-		tag: "inspirational"
-	},
-
-	"No Matter, We Rise": {
-		path: "poetry/no-matter-we-rise.html",
-		releaseDate: "2025-05-03",
-		tag: "inspirational"
-	},
-
-	"More Then a Word": {
-		path: "poetry/more-then-a-word.html",
-		releaseDate: "2025-04-26",
-		tag: "inspirational"
-	},
-	"The Playful Pooch": {
-		path: "poetry/the-playful-pooch.html",
-		releaseDate: "2025-04-26",
-		tag: "comedy"
-	},
-	"Endless Scream": {
-		path: "poetry/endless-scream.html",
-		releaseDate: "2025-04-26",
-		tag: "inspirational"
-	},
-	"A Daughter’s Truth": {
-		path: "poetry/a-daughters-truth.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"A Journey Through Grief": {
-		path: "poetry/a-journey-through-grief.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"Animal parade": {
-		path: "poetry/animal-parade.html",
-		releaseDate: "2025-04-17",
-		tag: "comedy"
-	},
-	"Dream": {
-		path: "poetry/dream.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"Easter Poem 2025": {
-		path: "poetry/easter-poem-2025.html",
-		releaseDate: "2025-04-17",
-		tag: "holiday"
-	},
-	"Echoes of a Hidden Girl": {
-		path: "poetry/echoes-of-a-hidden-girl.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"From Shadows to Light: A Journey of Truth": {
-		path: "poetry/from-shadows-to-light.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"Holiday of cheer": {
-		path: "poetry/holiday-of-cheer.html",
-		releaseDate: "2025-04-17",
-		tag: "holiday"
-	},
-	"I Am Trans and Proud": {
-		path: "poetry/i-am-trans-and-proud.html",
-		releaseDate: "2025-04-17",
-		tag: "pride"
-	},
-	"I will not": {
-		path: "poetry/i-will-not.html",
-		releaseDate: "2025-04-17",
-		tags: ["pride", "inspirational"]
-	},
-	"Language We Trust": {
-		path: "poetry/language-we-trust.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"Marina the axolotl": {
-		path: "poetry/marina-the-axolotl.html",
-		releaseDate: "2025-04-17",
-		tag: "comedy"
-	},
-	"Morning poem": {
-		path: "poetry/morning-poem.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"Rainbow's True Pride": {
-		path: "poetry/rainbows-true-pride.html",
-		releaseDate: "2025-04-17",
-		tag: "pride"
-	},
-	"Red round thing": {
-		path: "poetry/red-round-thing.html",
-		releaseDate: "2025-04-17",
-		tag: "comedy"
-	},
-	"Reflections Reborn": {
-		path: "poetry/reflections-reborn.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"Rise Above": {
-		path: "poetry/rise-above.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"Shadow": {
-		path: "poetry/shadow.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"The Friend Who Saved Her Life": {
-		path: "poetry/the-friend-who-saved-her-life.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"The Girl Inside": {
-		path: "poetry/the-girl-inside.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"The Road We Walk": {
-		path: "poetry/the-road-we-walk.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"The Silent Battle": {
-		path: "poetry/the-silent-battle.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"Trans Poem": {
-		path: "poetry/trans-poem.html",
-		releaseDate: "2025-04-17",
-		tag: "pride"
-	},
-	"Unbreakable": {
-		path: "poetry/unbreakable.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"When i am in need": {
-		path: "poetry/when-i-am-in-need.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"Will you miss me when im gone": {
-		path: "poetry/will-you-miss-me-when-im-gone.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"5 piggies revised": {
-		path: "poetry/5-piggies-revised.html",
-		releaseDate: "2025-04-17",
-		tag: "inspirational"
-	},
-	"5 piggies (adult)": {
-		path: "poetry/5-piggies-adult.html",
-		releaseDate: "2025-04-17",
-		tag: "adult"
-	},
-
-	//landing
-	"Funny Advertisements": {
-		path: "funnies/advertisements-landing.html",
-		releaseDate: "2025-05-24",
-		tag: "adult"
-	},
-
-	//funny ads
-	"slimblaze": {
-		path: "advertisements/slimblaze.html",
-		releaseDate: "2025-05-24",
-		tag: "adult"
-	},
-
+// Poetry titles are loaded dynamically from data/poems.json.
+// Only non-poetry entries are defined here.
+const staticTitleLinks = {
+        "Echoes in Stardust (new)": {
+                path: "short-stories/echoes-in-stardust/echoes-in-stardust.html",
+                releaseDate: "2025-05-24"
+        },
+        "Funny Advertisements": {
+                path: "funnies/advertisements-landing.html",
+                releaseDate: "2025-05-24",
+                tag: "adult"
+        },
+        "slimblaze": {
+                path: "advertisements/slimblaze.html",
+                releaseDate: "2025-05-24",
+                tag: "adult"
+        },
 };
+
+const titleLinks = { ...staticTitleLinks };
+
+let poemsLoaded = false;
+let poemsLoadPromise = null;
+
+function resolvePoemDataPath() {
+        const segments = window.location.pathname.split("/").filter(Boolean);
+        const depth = segments.length > 0 ? segments.length - 1 : 0;
+        return `${"../".repeat(depth)}data/poems.json`;
+}
+
+async function ensurePoemsLoaded() {
+        if (poemsLoaded) return;
+        if (!poemsLoadPromise) {
+                const dataPath = resolvePoemDataPath();
+                poemsLoadPromise = fetch(dataPath)
+                        .then(response => {
+                                if (!response.ok) {
+                                        throw new Error("Failed to load poems data");
+                                }
+                                return response.json();
+                        })
+                        .then(data => {
+                                if (!data || !Array.isArray(data.poems)) {
+                                        console.warn("Poems data is empty or malformed.");
+                                        return;
+                                }
+                                const sortedPoems = [...data.poems].sort((a, b) => {
+                                        const aDate = a.releaseDate ? new Date(a.releaseDate) : new Date(0);
+                                        const bDate = b.releaseDate ? new Date(b.releaseDate) : new Date(0);
+                                        return bDate - aDate;
+                                });
+                                sortedPoems.forEach(poem => {
+                                        titleLinks[poem.title] = {
+                                                path: `poetry/poem.html?slug=${encodeURIComponent(poem.slug)}`,
+                                                releaseDate: poem.releaseDate,
+                                                tags: poem.tags,
+                                        };
+                                });
+                        })
+                        .catch(err => {
+                                console.error("Failed to load poems from JSON:", err);
+                        })
+                        .finally(() => {
+                                poemsLoaded = true;
+                        });
+        }
+        return poemsLoadPromise;
+}
 
 let currentSearch = "";
 let currentSort = "";
 let currentFilter = "";
 
-
 function getRandomTitles(arr, n) {
-	const shuffled = [...arr].sort(() => 0.5 - Math.random());
-	return shuffled.slice(0, n);
+        const shuffled = [...arr].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, n);
 }
 
 async function fetchAverageRating(poemTitle) {
-	try {
-		const response = await fetch("https://backend-bzip.onrender.com/api/average-rating", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ poemTitle }),
-		});
-		const data = await response.json();
-		if (data.success && data.average !== null) {
-			return parseFloat(data.average);
-		}
-	} catch (err) {
-		console.warn("Failed to fetch rating for:", poemTitle, err);
-	}
-	return null;
+        try {
+                const response = await fetch("https://backend-bzip.onrender.com/api/average-rating", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ poemTitle }),
+                });
+                const data = await response.json();
+                if (data.success && data.average !== null) {
+                        return parseFloat(data.average);
+                }
+        } catch (err) {
+                console.warn("Failed to fetch rating for:", poemTitle, err);
+        }
+        return null;
 }
 
+async function renderTitles(containerId, limitOrFilter = null) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
 
-async function renderTitles(containerId, count = null) {
-	const container = document.getElementById(containerId);
-	if (!container) return;
+        await ensurePoemsLoaded();
 
-	let entries = Object.entries(titleLinks);
+        let limit = null;
+        let customFilter = null;
 
-	// Filter for page type
-	if (document.body.classList.contains("poetry-page")) {
-		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("poetry/"));
-	} else if (document.body.classList.contains("short-stories-page")) {
-		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("short-stories/"));
-	} else if (document.body.classList.contains("books-page")) {
-		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("books/"));
-	} else if (document.body.classList.contains("funnies-page")) {
-		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("funnies/"));
-	} else if (document.body.classList.contains("ad-page")) {
-		entries = entries.filter(([_, data]) => data.path && data.path.startsWith("advertisements/"));
-	} 
+        if (typeof limitOrFilter === "number") {
+                limit = limitOrFilter;
+        } else if (typeof limitOrFilter === "function") {
+                customFilter = limitOrFilter;
+        } else if (limitOrFilter && typeof limitOrFilter === "object") {
+                ({ limit = null, filter: customFilter = null } = limitOrFilter);
+        }
 
-	// Filter by tag
-	if (currentFilter) {
-		entries = entries.filter(([_, data]) => {
-			if (typeof data.tag === "string") return data.tag === currentFilter;
-			if (Array.isArray(data.tags)) return data.tags.includes(currentFilter);
-			return false;
-		});
-	}
+        let entries = Object.entries(titleLinks);
 
-	// Search by title
-	if (currentSearch.trim()) {
-		const searchLower = currentSearch.trim().toLowerCase();
-		entries = entries.filter(([title]) => title.toLowerCase().includes(searchLower));
-	}
+        if (document.body.classList.contains("poetry-page")) {
+                entries = entries.filter(([_, data]) => data.path && data.path.startsWith("poetry/"));
+        } else if (document.body.classList.contains("short-stories-page")) {
+                entries = entries.filter(([_, data]) => data.path && data.path.startsWith("short-stories/"));
+        } else if (document.body.classList.contains("books-page")) {
+                entries = entries.filter(([_, data]) => data.path && data.path.startsWith("books/"));
+        } else if (document.body.classList.contains("funnies-page")) {
+                entries = entries.filter(([_, data]) => data.path && data.path.startsWith("funnies/"));
+        } else if (document.body.classList.contains("ad-page")) {
+                entries = entries.filter(([_, data]) => data.path && data.path.startsWith("advertisements/"));
+        }
 
-	// Fetch ratings in parallel
-	const ratings = await Promise.all(entries.map(([title]) => fetchAverageRating(title)));
-	entries = entries.map(([title, data], index) => {
-		data.avgRating = ratings[index];
-		return [title, data];
-	});
+        if (customFilter) {
+                entries = entries.filter(([_, data]) => customFilter(data.path, data));
+        }
 
-	// Sort
-	if (currentSort === "titleAsc") {
-		entries.sort(([a], [b]) => a.localeCompare(b));
-	} else if (currentSort === "titleDesc") {
-		entries.sort(([a], [b]) => b.localeCompare(a));
-	} else if (currentSort === "dateAsc") {
-		entries.sort(([, a], [, b]) => new Date(a.releaseDate) - new Date(b.releaseDate));
-	} else if (currentSort === "dateDesc") {
-		entries.sort(([, a], [, b]) => new Date(b.releaseDate) - new Date(a.releaseDate));
-	} else if (currentSort === "ratingAsc") {
-		entries.sort(([, a], [, b]) => (a.avgRating ?? 0) - (b.avgRating ?? 0));
-	} else if (currentSort === "ratingDesc") {
-		entries.sort(([, a], [, b]) => (b.avgRating ?? 0) - (a.avgRating ?? 0));
-	}
+        if (currentFilter) {
+                entries = entries.filter(([_, data]) => {
+                        if (typeof data.tag === "string") return data.tag === currentFilter;
+                        if (Array.isArray(data.tags)) return data.tags.includes(currentFilter);
+                        return false;
+                });
+        }
 
-	// Limit if needed
-	if (count && count > 0) {
-		entries = getRandomTitles(entries, count);
-	}
+        if (currentSearch.trim()) {
+                const searchLower = currentSearch.trim().toLowerCase();
+                entries = entries.filter(([title]) => title.toLowerCase().includes(searchLower));
+        }
 
-	// Clear and rebuild
-	container.innerHTML = "";
-	entries.forEach(([title, data]) => {
-		let adjustedPath = data.path;
-		const releaseDate = data.releaseDate || "Unknown";
-		const avgRating = data.avgRating != null ? `${data.avgRating.toFixed(1)} / 5 ⭐` : "No rating yet";
+        const ratings = await Promise.all(entries.map(([title]) => fetchAverageRating(title)));
+        entries = entries.map(([title, data], index) => {
+                data.avgRating = ratings[index];
+                return [title, data];
+        });
 
-		if (document.body.classList.contains("poetry-page")) adjustedPath = adjustedPath.replace("poetry/", "");
-		else if (document.body.classList.contains("short-stories-page")) adjustedPath = adjustedPath.replace("short-stories/", "../short-stories/");
-		else if (document.body.classList.contains("books-page")) adjustedPath = adjustedPath.replace("books/", "../books/");
-		else if (document.body.classList.contains("funnies-page")) adjustedPath = adjustedPath.replace("funnies/", "../funnies/");
-		else if (document.body.classList.contains("ad-page")) adjustedPath = adjustedPath.replace("advertisements/", "./advertisements/");
+        if (currentSort === "titleAsc") {
+                entries.sort(([a], [b]) => a.localeCompare(b));
+        } else if (currentSort === "titleDesc") {
+                entries.sort(([a], [b]) => b.localeCompare(a));
+        } else if (currentSort === "dateAsc") {
+                entries.sort(([, a], [, b]) => new Date(a.releaseDate) - new Date(b.releaseDate));
+        } else if (currentSort === "dateDesc") {
+                entries.sort(([, a], [, b]) => new Date(b.releaseDate) - new Date(a.releaseDate));
+        } else if (currentSort === "ratingAsc") {
+                entries.sort(([, a], [, b]) => (a.avgRating ?? 0) - (b.avgRating ?? 0));
+        } else if (currentSort === "ratingDesc") {
+                entries.sort(([, a], [, b]) => (b.avgRating ?? 0) - (a.avgRating ?? 0));
+        }
 
-		const card = document.createElement("div");
-		card.className = "col-md-4 mb-4";
-		card.innerHTML = `
-			<div class="card text-center">
-				<div class="card-body">
-					<h5 class="card-title">${title}</h5>
-					<p class="card-text"><small>Release: ${releaseDate}</small></p>
-					<p class="card-text text-muted">Average Rating: ${avgRating}</p>
-					<a href="${adjustedPath}" class="btn btn-outline-primary">Read Now</a>
-				</div>
-			</div>
-		`;
-		container.appendChild(card);
-	});
+        if (limit && limit > 0) {
+                entries = getRandomTitles(entries, limit);
+        }
+
+        container.innerHTML = "";
+        entries.forEach(([title, data]) => {
+                let adjustedPath = data.path;
+                const releaseDate = data.releaseDate || "Unknown";
+                const avgRating = data.avgRating != null ? `${data.avgRating.toFixed(1)} / 5 ⭐` : "No rating yet";
+
+                if (document.body.classList.contains("poetry-page")) adjustedPath = adjustedPath.replace("poetry/", "");
+                else if (document.body.classList.contains("short-stories-page")) adjustedPath = adjustedPath.replace("short-stories/", "../short-stories/");
+                else if (document.body.classList.contains("books-page")) adjustedPath = adjustedPath.replace("books/", "../books/");
+                else if (document.body.classList.contains("funnies-page")) adjustedPath = adjustedPath.replace("funnies/", "../funnies/");
+                else if (document.body.classList.contains("ad-page")) adjustedPath = adjustedPath.replace("advertisements/", "./advertisements/");
+
+                const card = document.createElement("div");
+                card.className = "col-md-4 mb-4";
+                card.innerHTML = `
+                        <div class="card text-center">
+                                <div class="card-body">
+                                        <h5 class="card-title">${title}</h5>
+                                        <p class="card-text"><small>Release: ${releaseDate}</small></p>
+                                        <p class="card-text text-muted">Average Rating: ${avgRating}</p>
+                                        <a href="${adjustedPath}" class="btn btn-outline-primary">Read Now</a>
+                                </div>
+                        </div>
+                `;
+                container.appendChild(card);
+        });
 }
-
-
-
 
 window.onload = () => {
-	const sortSelect = document.getElementById("sortOptions");
-	const searchInput = document.getElementById("searchInput");
-	const searchButton = document.getElementById("searchButton");
-	const filterSelect = document.getElementById("filterOptions");
+        const sortSelect = document.getElementById("sortOptions");
+        const searchInput = document.getElementById("searchInput");
+        const searchButton = document.getElementById("searchButton");
+        const filterSelect = document.getElementById("filterOptions");
 
-	const featuredContainer = document.getElementById("featured-titles");
-	const isPoetryPage = document.body.classList.contains("poetry-page");
-	const isStoriesPage = document.body.classList.contains("short-stories-page");
-	const isBooksPage = document.body.classList.contains("books-page");
-	const isFunniesPage = document.body.classList.contains("funnies-page");
-	const isAdPage = document.body.classList.contains("ad-page");
+        const featuredContainer = document.getElementById("featured-titles");
+        const isPoetryPage = document.body.classList.contains("poetry-page");
+        const isStoriesPage = document.body.classList.contains("short-stories-page");
+        const isBooksPage = document.body.classList.contains("books-page");
+        const isFunniesPage = document.body.classList.contains("funnies-page");
+        const isAdPage = document.body.classList.contains("ad-page");
 
-	// Render only advertisement cards on funnies-page
-	if (featuredContainer && isFunniesPage) {
-		renderTitles("featured-titles", path => /^advertisements\/[^/]+\.html$/.test(path));
-		return; // ← prevent other rendering
-	}
+        if (featuredContainer && isFunniesPage) {
+                renderTitles("featured-titles", (path) => /^advertisements\/[^/]+\.html$/.test(path));
+                return;
+        }
 
-	// Render ads page
-	if (featuredContainer && isAdPage) {
-		renderTitles("featured-titles", path => /^advertisements\/[^/]+\.html$/.test(path));
-		return;
-	}
+        if (featuredContainer && isAdPage) {
+                renderTitles("featured-titles", (path) => /^advertisements\/[^/]+\.html$/.test(path));
+                return;
+        }
 
-	// Default page rendering
-	if (featuredContainer) {
-		if (isPoetryPage || isStoriesPage || isBooksPage) {
-			renderTitles("featured-titles");
-		} else {
-			renderTitles("featured-titles", 3);
-		}
-	}
+        if (featuredContainer) {
+                if (isPoetryPage || isStoriesPage || isBooksPage) {
+                        renderTitles("featured-titles");
+                } else {
+                        renderTitles("featured-titles", 3);
+                }
+        }
 
-	// Setup Search
-	if (searchInput && searchButton) {
-		searchButton.addEventListener("click", () => {
-			currentSearch = searchInput.value;
-			currentFilter = "";
-			renderTitles("featured-titles");
-		});
-		searchInput.addEventListener("keypress", (e) => {
-			if (e.key === "Enter") {
-				currentSearch = searchInput.value;
-				currentFilter = "";
-				renderTitles("featured-titles");
-			}
-		});
-	}
+        if (searchInput && searchButton) {
+                searchButton.addEventListener("click", () => {
+                        currentSearch = searchInput.value;
+                        currentFilter = "";
+                        renderTitles("featured-titles");
+                });
+                searchInput.addEventListener("keypress", (e) => {
+                        if (e.key === "Enter") {
+                                currentSearch = searchInput.value;
+                                currentFilter = "";
+                                renderTitles("featured-titles");
+                        }
+                });
+        }
 
-	// Setup Sort
-	if (sortSelect) {
-		sortSelect.addEventListener("change", () => {
-			currentSort = sortSelect.value;
-			renderTitles("featured-titles");
-		});
-	}
+        if (sortSelect) {
+                sortSelect.addEventListener("change", () => {
+                        currentSort = sortSelect.value;
+                        renderTitles("featured-titles");
+                });
+        }
 
-	// Setup Filter
-	if (filterSelect) {
-		filterSelect.addEventListener("change", () => {
-			currentFilter = filterSelect.value;
-			currentSearch = "";
-			renderTitles("featured-titles");
-		});
-	}
+        if (filterSelect) {
+                filterSelect.addEventListener("change", () => {
+                        currentFilter = filterSelect.value;
+                        currentSearch = "";
+                        renderTitles("featured-titles");
+                });
+        }
 };
-
-
-
