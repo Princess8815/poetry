@@ -34,6 +34,7 @@ function resolvePoemDataPath() {
 }
 
 
+
 function getSlugFromLocation() {
         const url = new URL(window.location.href);
         const paramSlug = url.searchParams.get("slug");
