@@ -1,5 +1,5 @@
 function playPoemAudio(titleSlug) {
-        const audioPath = `../audio/${titleSlug}.mp3`;
+        const audioPath = `../audio/${titleSlug}.wav`;
 
         // Check if the file exists first
         fetch(audioPath, { method: "HEAD" })
@@ -8,14 +8,14 @@ function playPoemAudio(titleSlug) {
                                 // Only create audio if it exists
                                 const audio = new Audio(audioPath);
                                 audio.play().catch(() => {
-                                        alert("Audio is unavailable for this story.");
+                                        alert("Audio is not available for this story.");
                                 });
                         } else {
                                 alert("Audio is unavailable for this story.");
                         }
                 })
                 .catch(() => {
-                        alert("Audio is unavailable for this story.");
+                        alert("Audio cannot be found for this story.");
                 });
 }
 
